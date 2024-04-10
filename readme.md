@@ -16,7 +16,7 @@
 
 Посилання на оригінальне зображення повинно зберігатися в data-атрибуті source на елементі <img>, і вказуватися в href посилання. Не додавай інші HTML теги або CSS класи, крім тих, що містяться в цьому шаблоні.
 
-<li class="gallery__item">
+<!-- <li class="gallery__item">
   <a class="gallery__link" href="large-image.jpg">
     <img
       class="gallery__image"
@@ -25,7 +25,7 @@
       alt="Image description"
     />
   </a>
-</li>
+</li> -->
 
 Зверни увагу на те, що зображення обгорнуте посиланням, отже по кліку за замовчуванням користувач буде перенаправлений на іншу сторінку. Заборони цю поведінку за замовчуванням.
 
@@ -39,11 +39,11 @@
 
 Необхідно трохи змінити розмітку картки галереї, використовуй цей шаблон.
 
-<li class="gallery__item">
+<!-- <li class="gallery__item">
    <a class="gallery__link" href="large-image.jpg">
       <img class="gallery__image" src="small-image.jpg" alt="Image description" />
    </a>
-</li>
+</li> -->
 
 Виконуй це завдання у файлах 02-lightbox.html і 02-lightbox.js. Розбий його на декілька підзавдань:
 
