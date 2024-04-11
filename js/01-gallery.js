@@ -2,6 +2,8 @@ import { galleryItems } from "./gallery-items.js";
 
 // Change code below this line
 const gallery = document.querySelector(".gallery");
+const body = document.querySelector("body");
+
 gallery.addEventListener("click", onShowOriginalSizeImg);
 
 function createGalleryMarkup(gallery) {
@@ -47,18 +49,21 @@ function openFullSizeImg(e) {
       alt="${e.target.alt}" 
       style = "border-radius: 5px;"
       >`,
+    { onClose: () => closeModal() },
   );
 
   modalWindow.show();
+  body.classList.add("showImg");
 }
 
 function closeModal() {
+  body.classList.remove("showImg");
   window.removeEventListener("keydown", onCloseFullSizeImgByEsc);
-  modalWindow.close();
+  console.log("закрито");
 }
 
 function onCloseFullSizeImgByEsc(e) {
   if (e.code === "Escape") {
-    closeModal();
+    modalWindow.close();
   }
 }
