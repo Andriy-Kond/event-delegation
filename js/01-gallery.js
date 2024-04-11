@@ -1,8 +1,22 @@
 import { galleryItems } from "./gallery-items.js";
 
 // Change code below this line
-const gallery = document.querySelector(".gallery");
+const head = document.querySelector("head");
 const body = document.querySelector("body");
+const gallery = document.querySelector(".gallery");
+
+const basicLightboxStyle = document.createElement("link");
+basicLightboxStyle.rel = "stylesheet";
+basicLightboxStyle.href = "https://cdnjs.cloudflare.com/ajax/libs/basicLightbox/5.0.4/basicLightbox.min.css";
+basicLightboxStyle.crossorigin = "anonymous";
+basicLightboxStyle.referrerpolicy = "no-referrer";
+head.append(basicLightboxStyle);
+
+const basicLightboxScript = document.createElement("script");
+basicLightboxScript.src = "https://cdnjs.cloudflare.com/ajax/libs/basicLightbox/5.0.4/basicLightbox.min.js";
+basicLightboxScript.crossorigin = "anonymous";
+basicLightboxScript.referrerpolicy = "no-referrer";
+body.lastElementChild.append(basicLightboxScript);
 
 gallery.addEventListener("click", onShowOriginalSizeImg);
 
@@ -59,7 +73,6 @@ function openFullSizeImg(e) {
 function closeModal() {
   body.classList.remove("showImg");
   window.removeEventListener("keydown", onCloseFullSizeImgByEsc);
-  console.log("закрито");
 }
 
 function onCloseFullSizeImgByEsc(e) {
