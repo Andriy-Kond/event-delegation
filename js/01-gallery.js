@@ -1,26 +1,28 @@
 import { galleryItems } from "./gallery-items.js";
 
 // Change code below this line
-const head = document.querySelector("head");
-const body = document.querySelector("body");
-const gallery = document.querySelector(".gallery");
+const refs = {
+  head: document.querySelector("head"),
+  body: document.querySelector("body"),
+  gallery: document.querySelector(".gallery"),
+};
 
 const basicLightboxStyle = document.createElement("link");
 basicLightboxStyle.rel = "stylesheet";
 basicLightboxStyle.href = "https://cdnjs.cloudflare.com/ajax/libs/basicLightbox/5.0.4/basicLightbox.min.css";
 basicLightboxStyle.crossorigin = "anonymous";
 basicLightboxStyle.referrerpolicy = "no-referrer";
-head.append(basicLightboxStyle);
+refs.head.append(basicLightboxStyle);
 
 const basicLightboxScript = document.createElement("script");
 basicLightboxScript.src = "https://cdnjs.cloudflare.com/ajax/libs/basicLightbox/5.0.4/basicLightbox.min.js";
 basicLightboxScript.crossorigin = "anonymous";
 basicLightboxScript.referrerpolicy = "no-referrer";
-body.lastElementChild.append(basicLightboxScript);
+refs.body.lastElementChild.append(basicLightboxScript);
 
-gallery.addEventListener("click", onShowOriginalSizeImg);
+refs.gallery.addEventListener("click", onShowOriginalSizeImg);
 
-function createGalleryMarkup(gallery) {
+function createGalleryMarkup(galleryItems) {
   return galleryItems
     .map(({ original, preview, description }) => {
       return `
@@ -37,7 +39,7 @@ function createGalleryMarkup(gallery) {
     .join("");
 }
 
-gallery.innerHTML = createGalleryMarkup(galleryItems);
+refs.gallery.innerHTML = createGalleryMarkup(galleryItems);
 
 function onShowOriginalSizeImg(e) {
   // console.log("onShowOriginalSizeImg >> e.target.className:::", e.target.className); // gallery__image gallery__test
@@ -67,11 +69,11 @@ function openFullSizeImg(e) {
   );
 
   modalWindow.show();
-  body.classList.add("showImg");
+  refs.body.classList.add("showImg");
 }
 
 function closeModal() {
-  body.classList.remove("showImg");
+  refs.body.classList.remove("showImg");
   window.removeEventListener("keydown", onCloseFullSizeImgByEsc);
 }
 
