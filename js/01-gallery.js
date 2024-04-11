@@ -16,6 +16,9 @@ refs.head.append(basicLightboxStyle);
 
 const basicLightboxScript = document.createElement("script");
 basicLightboxScript.src = "https://cdnjs.cloudflare.com/ajax/libs/basicLightbox/5.0.4/basicLightbox.min.js";
+// ! Перевірка хешу не працює при такому підключенні - треба підключати у html-файлі
+// basicLightboxScript.integrity =
+//   "sha512-ycqisnM5/8n5gDxYe0MTYoW+5DDuupgGdbdsJ9zcu66ZszaKh4JGsmjzyi7jJY4AjynXc43DOba/m+yVGmv+wQ==";
 basicLightboxScript.crossorigin = "anonymous";
 basicLightboxScript.referrerpolicy = "no-referrer";
 refs.body.lastElementChild.append(basicLightboxScript);

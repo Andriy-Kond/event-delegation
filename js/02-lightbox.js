@@ -1,65 +1,56 @@
 import { galleryItems } from "./gallery-items.js";
 
 // Change code below this line
-const gallery = document.querySelector(".gallery");
-const body = document.querySelector("body");
-const head = document.querySelector("head");
+const refs = {
+  head: document.querySelector("head"),
+  body: document.querySelector("body"),
+  gallery: document.querySelector(".gallery"),
+};
 
-gallery.addEventListener("click", onShowOriginalSizeImg);
+const simpleLightboxStyle = document.createElement("link");
+simpleLightboxStyle.rel = "stylesheet";
+simpleLightboxStyle.href = "https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.3/simple-lightbox.css";
+simpleLightboxStyle.crossorigin = "anonymous";
+simpleLightboxStyle.referrerpolicy = "no-referrer";
+refs.head.append(simpleLightboxStyle);
 
-function createGalleryMarkup(gallery) {
+// ! Бібліотека simpleLightbox не працює при підключенні через append чи  insertAdjacentHTML - треба підключати у html-файлі!
+// const simpleLightboxScript = document.createElement("script");
+// simpleLightboxScript.src = "https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.3/simple-lightbox.min.js";
+// simpleLightboxScript.crossorigin = "anonymous";
+// simpleLightboxScript.referrerpolicy = "no-referrer";
+// document.body.lastElementChild.append(simpleLightboxScript);
+
+// const simpleLightBoxScript = `<script
+//       src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.3/simple-lightbox.min.js"
+//       integrity="sha512-Vtot07oogPy4e0JzAfUgyvia0fATgR1PWWNG89EeQgPXmaIhjGQIFijUVxRn0TScCMCH57Y7eJSixmYYDJkJ1A=="
+//       crossorigin="anonymous"
+//       referrerpolicy="no-referrer"
+//     ></script>`;
+
+// document.body.insertAdjacentHTML("beforeend", simpleLightBoxScript);
+
+function createGalleryMarkup(galleryItems) {
   return galleryItems
     .map(({ original, preview, description }) => {
       return `
-      <li class="gallery__item">
-        <a class="gallery__link" href="${original}">
-          <img 
-            class="gallery__image gallery__test"
-            src="${preview}"
-            data-source="${original}"
-            alt="${description}" />
-        </a>
-      </li>`;
+        <li class="gallery__item">
+          <a class="gallery__link" href="${original}">
+              <img 
+                class="gallery__image" 
+                src="${preview}"
+                alt="${description}" />
+          </a>
+        </li>`;
     })
     .join("");
 }
 
-gallery.innerHTML = createGalleryMarkup(galleryItems);
+refs.gallery.innerHTML = createGalleryMarkup(galleryItems);
 
-function onShowOriginalSizeImg(e) {
-  e.preventDefault();
-
-  if (!e.target.classList.contains("gallery__image")) {
-    return;
-  }
-
-  openFullSizeImg(e);
-}
-
-let modalWindow;
-
-function openFullSizeImg(e) {
-  window.addEventListener("keydown", onCloseFullSizeImgByEsc);
-  modalWindow = basicLightbox.create(
-    `<img 
-      src="${e.target.dataset.source}" 
-      alt="${e.target.alt}" 
-      style = "border-radius: 5px;"
-      >`,
-    { onClose: () => closeModal() },
-  );
-
-  modalWindow.show();
-  body.classList.add("showImg");
-}
-
-function closeModal() {
-  body.classList.remove("showImg");
-  window.removeEventListener("keydown", onCloseFullSizeImgByEsc);
-}
-
-function onCloseFullSizeImgByEsc(e) {
-  if (e.code === "Escape") {
-    modalWindow.close();
-  }
-}
+new SimpleLightbox(".gallery a", {
+  captions: true,
+  captionsData: "alt",
+  captionDelay: 250,
+  // captionPosition: "top",
+});
